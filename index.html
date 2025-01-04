@@ -338,11 +338,8 @@
         // Inicializa Firebase
         const app = initializeApp(firebaseConfig);
 
-        // Inicializa el servicio de mensajería
-        const messaging = getMessaging(app);
-
                 // Registro del Service Worker
-                navigator.serviceWorker.register("firebase-messaging-sw.js")
+                navigator.serviceWorker.register("https://lverapizza.github.io/App/firebase-messaging-sw.js")
             .then((registration) => {
                 console.log("Service Worker registrado con éxito 2:", registration);
             })
@@ -350,8 +347,11 @@
                 console.error("Error al registrar el Service Worker:", error);
             });
 
-        // Solicita permisos para notificaciones
-        const requestNotificationPermission = async () => {
+            // Inicializa el servicio de mensajería
+            const messaging = getMessaging(app);
+
+            // Solicita permisos para notificaciones
+            const requestNotificationPermission = async () => {
             try {
                 const token = await getToken(messaging, { vapidKey: "BPRKz7-_9El7FWTG7hpCTGhl_cPRoWK79Ng2UwgOuctmGQc3sxG0Rg2io2aAsvYFvBDPmF9vd-6g6oG65XQmJ4A" });
                 console.log("FCM Token obtenido:", token);
