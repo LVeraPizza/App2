@@ -341,6 +341,16 @@
         // Inicializa el servicio de mensajería
         const messaging = getMessaging(app);
 
+        // Registro del Service Worker
+            navigator.serviceWorker.register("https://lverapizza.github.io/App/firebase-messaging-sw.js")
+
+            .then((registration) => {
+                console.log("Service Worker registrado con éxito 2:", registration);
+            })
+            .catch((error) => {
+                console.error("Error al registrar el Service Worker:", error);
+            });
+
         // Solicita permisos para notificaciones
         const requestNotificationPermission = async () => {
             try {
@@ -360,15 +370,6 @@
             alert(`Notificación: ${payload.notification.title}`);
         });
 
-        // Registro del Service Worker
-            navigator.serviceWorker.register("https://lverapizza.github.io/App/firebase-messaging-sw.js")
-
-            .then((registration) => {
-                console.log("Service Worker registrado con éxito 2:", registration);
-            })
-            .catch((error) => {
-                console.error("Error al registrar el Service Worker:", error);
-            });
     </script>
 
 
