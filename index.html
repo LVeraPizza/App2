@@ -341,9 +341,8 @@
         // Inicializa el servicio de mensajería
         const messaging = getMessaging(app);
 
-        // Registro del Service Worker
-            navigator.serviceWorker.register("https://lverapizza.github.io/App/firebase-messaging-sw.js")
-
+                // Registro del Service Worker
+                navigator.serviceWorker.register("firebase-messaging-sw.js")
             .then((registration) => {
                 console.log("Service Worker registrado con éxito 2:", registration);
             })
@@ -369,6 +368,7 @@
             console.log("Mensaje recibido:", payload);
             alert(`Notificación: ${payload.notification.title}`);
         });
+
 
     </script>
 
