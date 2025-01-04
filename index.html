@@ -172,7 +172,7 @@
             /* Mantiene la proporción de la imagen */
         }
 
-            /* EVENTO NAVIDEÑO*/
+        /* EVENTO NAVIDEÑO*/
         .snow-container {
             position: fixed;
             top: 0;
@@ -180,9 +180,10 @@
             width: 100%;
             height: 100%;
             pointer-events: none;
-            z-index: 999; /* Asegura que esté en la parte superior */
+            z-index: 999;
+            /* Asegura que esté en la parte superior */
         }
-        
+
         .snowflake {
             position: absolute;
             top: -10px;
@@ -191,20 +192,24 @@
             opacity: 0.8;
             animation: fall 10s linear infinite, drift 5s ease-in-out infinite;
         }
-        
+
         @keyframes fall {
             0% {
                 top: -10px;
             }
+
             100% {
                 top: 100%;
             }
         }
-        
+
         @keyframes drift {
-            0%, 100% {
+
+            0%,
+            100% {
                 transform: translateX(0);
             }
+
             50% {
                 transform: translateX(20px);
             }
@@ -213,14 +218,14 @@
 </head>
 
 <body>
-      <!-- EVENTO NAVIDEÑO 
+    <!-- EVENTO NAVIDEÑO 
     <div class="snow-container">
     </div>-->
 
     <!-- Barra de estado -->
     <div id="status-bar"></div>
 
-   <!-- ESTO ES PARA EL DIA QUE EL LOCAL ESTE CERRADO
+    <!-- ESTO ES PARA EL DIA QUE EL LOCAL ESTE CERRADO
         SINO DEBE MANTENERSE COMENTADO
     <div class="aviso-importante">
         <h2>¡AVISO IMPORTANTE!</h2>
@@ -256,7 +261,7 @@
     </style> -->
 
 
-     <!--  <div class="carrusel">
+    <!--  <div class="carrusel">
         <div class="imagenes">
             <img src="img/2.jpg" alt="Imagen 1">
             <img src="img/1.jpg" alt="Imagen 2">
@@ -270,9 +275,9 @@
         <button class="next" onclick="cambiarImagen(1)">&#10095;</button>
     </div>
     <script src="carrusel.js"></script> -->
-        <div class="imagenes">
-            <img src="img/promociones/2_pizzas_romanas.png" alt="Imagen 1">
-        </div>
+    <div class="imagenes">
+        <img src="img/promociones/2_pizzas_romanas.png" alt="Imagen 1">
+    </div>
 
 
     <div class="button-container-1">
@@ -291,7 +296,7 @@
         }
     </script>
 
-  <!--  <script>
+    <!--  <script>
         const snowContainer = document.querySelector('.snow-container');
     
         function createSnowflake() {
@@ -313,6 +318,60 @@
     
         setInterval(createSnowflake, 300); // Genera un copo nuevo cada 300ms
     </script>-->
+
+    <script type="module">
+        // Importa Firebase y el módulo de Cloud Messaging
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/9.18.0/firebase-app.js";
+        import { getMessaging, getToken, onMessage } from "https://www.gstatic.com/firebasejs/9.18.0/firebase-messaging.js";
+
+        // Configuración de Firebase
+        const firebaseConfig = {
+            apiKey: "AIzaSyCzMNKimcw1kaaJlMdTKj7RAdlsHyaImBk",
+            authDomain: "vera-pizza-app.firebaseapp.com",
+            projectId: "vera-pizza-app",
+            storageBucket: "vera-pizza-app.appspot.com",
+            messagingSenderId: "783988757356",
+            appId: "1:783988757356:web:c66d3f2571aff0f125d949",
+            measurementId: "G-FNLSPHKXFW"
+        };
+
+        // Inicializa Firebase
+        const app = initializeApp(firebaseConfig);
+
+        // Inicializa el servicio de mensajería
+        const messaging = getMessaging(app);
+
+        // Solicita permisos para notificaciones
+        const requestNotificationPermission = async () => {
+            try {
+                const token = await getToken(messaging, { vapidKey: "BPRKz7-_9El7FWTG7hpCTGhl_cPRoWK79Ng2UwgOuctmGQc3sxG0Rg2io2aAsvYFvBDPmF9vd-6g6oG65XQmJ4A" });
+                console.log("FCM Token obtenido:", token);
+            } catch (err) {
+                console.error("Error al obtener el token de FCM:", err);
+            }
+        };
+
+        // Solicita permisos al cargar la página
+        requestNotificationPermission();
+
+        // Maneja mensajes recibidos en primer plano
+        onMessage(messaging, (payload) => {
+            console.log("Mensaje recibido:", payload);
+            alert(`Notificación: ${payload.notification.title}`);
+        });
+
+        // Registro del Service Worker
+        navigator.serviceWorker.register("firebase-messaging-sw.js")
+            .then((registration) => {
+                console.log("Service Worker registrado con éxito 2:", registration);
+            })
+            .catch((error) => {
+                console.error("Error al registrar el Service Worker:", error);
+            });
+    </script>
+
+
+
 
 </body>
 
