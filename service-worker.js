@@ -14,6 +14,7 @@ self.addEventListener('install', (event) => {
         'https://lverapizza.github.io/App/service-worker.js',
         'https://lverapizza.github.io/App/logo_vp.png',
         'https://lverapizza.github.io/App/img/eventos/logo_año_nuevo.png',
+        'https://lverapizza.github.io/App/firebase-messaging-sw.js',
 
         // Agrega otros archivos que necesites en el caché
       ]);
