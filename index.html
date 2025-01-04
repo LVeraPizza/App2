@@ -290,7 +290,7 @@
     <script src="estado.js"></script>
     <script>
         if ('serviceWorker' in navigator) {
-            navigator.serviceWorker.register('service-worker.js')
+            navigator.serviceWorker.register('https://lverapizza.github.io/App/service-worker.js')
                 .then(() => console.log('Service Worker registrado con éxito.'))
                 .catch((error) => console.error('Error al registrar el Service Worker:', error));
         }
